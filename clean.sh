@@ -1,5 +1,5 @@
 #!/bin/bash
-# Define the list of strings to check for at the beginning of file names
+# Define the list of strings to check for at the beginning / ending of file names. Case insensitive, separated by [ ._-]
 string_list=("private","image")
 
 # Define the list of strings to check anywhere
@@ -19,23 +19,30 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-# Required Commands
+# Check if bash is version 4.0
+BASH_VERSION=$(bash --version | head -n 1 | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -n 1)
+MAJOR_VERSION=$(echo "$BASH_VERSION" | cut -d. -f1)
+if [ "$MAJOR_VERSION" -lt 4 ]; then
+    echo "Bash version 4 or higher is required"
+    exit 1
+fi
+
+# Check if the required commands are installed
 commands=("mkvpropedit" "atomicparsley")
 
 # Function to check if a command exists
 check_command() {
     if ! command -v "$1" &> /dev/null; then
-        echo "Error: '$1' command not found. Aborting."
+        echo "Error: required application '$1' not found"
         exit 1
     fi
 }
-
 # Check each command in the list
 for cmd in "${commands[@]}"; do
     check_command "$cmd"
 done
 
-# Simple "is array unique" function
+# Simple function to check if the array has no duplicated entries. Prints message
 function is_array_unique() {
     local array=("$@")
     local length=${#array[@]}
@@ -58,7 +65,7 @@ escape_for_sed() {
     echo "$escaped_string"
 }
 
-# Just print a warn message if some elements are in there multiple times
+# Just print a warn message if some elements are in there multiple times, ignore return value
 is_array_unique "${string_list[@]}"
 is_array_unique "${string_list_c[@]}"
 
@@ -68,7 +75,7 @@ process_file()
     local file="$1"
     prif=""
     org=$file
-    # Überprüfe, ob der String den gewünschten Syntax hat
+    # Make sure to skip the usual S**E** annotation
     if [[ $file =~ ^S[0-9]{2}E[0-9]{2}[\.-] ]]; then
         prif=$(echo "$file" | sed -nE 's/.*(S[0-9]{2}E[0-9]{2}).*/\1/p')
         prif="$prif-"
