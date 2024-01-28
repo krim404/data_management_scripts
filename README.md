@@ -8,7 +8,7 @@ Only a few hand picked scripts are explained here, the others are (at least in m
 A simple script to copy only new files between a source folder and an LTFS target using ltfs_ordered_copy. This is meant to be used as a LTFS->LTFS copy tool to copy only new files to a tape as the original tool lacks a "skip if exists" flag.
 
 ### clean.sh
-A script to check filenames of forbidden words and renames them recursively. Also includes a metadata check and overwrite feature.
+A script to check filenames (especially video files) for forbidden words and renames them recursively. Also includes a metadata check and metadata refresh feature.
 
 ## How to Use:
 Each script in this repository will probably lack a good documentation but will do its job. These scripts are not meant to be used directly but more as a entrypoint
