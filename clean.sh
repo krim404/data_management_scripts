@@ -228,8 +228,11 @@ for param in "$@"; do
 	if [ -d "$param" ]; then
 		process_directory "$param" 2>&1
     elif [ -f "$param" ]; then
-        process_file "$param" 2>&1
+        dir=$(dirname "$param")
+        filename=$(basename "$param")
+        cd "$dir"
+        process_file "$filename" 2>&1
     else
-		echo -e "${YELLOW}param $param ist not valid${NC}"
-	fi
+	echo -e "${YELLOW}param $param ist not valid${NC}"
+    fi
 done
