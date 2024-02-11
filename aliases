@@ -1,0 +1,11 @@
+alias makeltfs='sudo mkltfs -d F3A3019000 -n'
+alias makeltfs2='sudo mkltfs -d F3A3019004 -n'
+alias getloads='xattr -lpv ltfs.mediaLoads .'
+alias mountltfs='sudo ltfs -o devname=F3A3019000 -o eject -o capture_index=/Volumes/External/index -o sync_type=unmount /Volumes/ltfs1'
+alias mountltfs2='sudo ltfs -o devname=F3A3019004 -o eject -o capture_index=/Volumes/External/index -o sync_type=unmount /Volumes/ltfs2'
+alias recoverltfs='sudo ltfs -o devname=F3A3019000 -o force_mount_no_eod /Volumes/ltfs1'
+alias ltfshp='/Library/Frameworks/LTFS.framework/Versions/Current/usr/bin/ltfs'
+alias ltfscp='ltfs_ordered_copy -av'
+alias ltfsrs="rsync --size-only -rlDv --exclude '.streams' --exclude '.DS_Store' --exclude '.AppleDouble' --exclude '@Recycle' --exclude '@Recently-Snapshot' --exclude '.LSOverride' --exclude '._*' --exclude '.Spotlight-V100' --exclude '.Trashes' --exclude '.fseventsd' --exclude '.VolumeIcon.icns' --exclude '.TemporaryItems' --exclude '.apdisk' --exclude '.@__thumb'"
+alias eject='mt -f /dev/nst0 offline' #Linux only
+alias makeclean="find . \( -name '.DS_Store' -o -name '.streams' -o -name '.AppleDouble' -o -name '.LSOverride' -o -name '._*' -o -name '.Spotlight-V100' -o -name '.Trashes' -o -name '.fseventsd' -o -name '.VolumeIcon.icns' -o -name '.TemporaryItems' -o -name '.apdisk' -o -name '.@__thumb' -o -name '@Recently-Snapshot' -o -name '@Recycle' \) -exec rm -rfv {} +"
