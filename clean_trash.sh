@@ -22,6 +22,6 @@ while IFS= read -r line; do
 done < "$smbconf"
 
 for share in "${shares[@]}"; do
-  find $share* -P -type f -atime +14 -exec rm -rf '{}' \; 2> /dev/null
+  find $share* -type f -atime +14 -exec rm -rf '{}' \; 2> /dev/null
   find $share -depth -type d -empty -exec rmdir {} \; 2> /dev/null
 done
