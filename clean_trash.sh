@@ -14,7 +14,9 @@ while IFS= read -r line; do
     if [[ $line =~ ^path\ =\ (.*) ]]; then
       share_path="${BASH_REMATCH[1]}/.recycle/"
     elif [[ $line =~ ^vfs\ objects\ =\ recycle ]]; then
-      shares+=("$share_path")
+      if [ -e "$share_path" ]; then
+         shares+=("$share_path")
+      fi
     fi
   fi
 done < "$smbconf"
