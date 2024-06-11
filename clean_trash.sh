@@ -10,12 +10,10 @@ while IFS= read -r line; do
     in_share_block=true
     share=$(echo $line | cut -d '[' -f2 | cut -d ']' -f1)
     share_path=""
-    has_recycle=false
   elif [[ $in_share_block = true ]]; then
     if [[ $line =~ ^path\ =\ (.*) ]]; then
       share_path="${BASH_REMATCH[1]}/.recycle/"
     elif [[ $line =~ ^vfs\ objects\ =\ recycle ]]; then
-      has_recycle=true
       shares+=("$share_path")
     fi
   fi
