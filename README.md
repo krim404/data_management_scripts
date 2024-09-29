@@ -10,6 +10,15 @@ A simple script to copy only new files between a source folder and an LTFS targe
 ### clean.sh
 A script to check filenames (especially video files) for forbidden words and renames them recursively. Also includes a metadata check and metadata refresh feature.
 
+### clean_trash.sh
+Scans all trash folder from a samba config file and empties it when the files are older than x days.
+
+### fix_german.sh
+More an alias than a script - simply renames the Umlauts and Esszett (äöüß to aeoeuess) in all files at the target.
+
+### extend_sync.sh
+Primarily used to sync a big archive to multiple smaller tapes and only copy new files. Obviously cannot check if files have changed and cannot delete. Has extended checks.
+
 ## How to Use:
 Each script in this repository will probably lack a good documentation but will do its job. These scripts are not meant to be used directly but more as a entrypoint
 
